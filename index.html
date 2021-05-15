@@ -1,28 +1,494 @@
 <!DOCTYPE html>
+
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+	}
+
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+
+	h2 {
+		font-size:28px;
+		font-weight:250;
+	}
+
+	.disclaimerbox {
+		background-color: #eee;
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	img.header-img {
+		height: 100%;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	img.rounded {
+		height: 100%;
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+
+	td.dl-link {
+		height: 160px;
+		text-align: justify; /* For Edge */
+  		font-size: 22px;
+	}
+
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		        0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		        5px 5px 0 0px #fff, /* The second layer */
+		        5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		        10px 10px 0 0px #fff, /* The third layer */
+		        10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		        15px 15px 0 0px #fff, /* The fourth layer */
+		        15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		        20px 20px 0 0px #fff, /* The fifth layer */
+		        20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		        25px 25px 0 0px #fff, /* The fifth layer */
+		        25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		        0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		        0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		        5px 5px 0 0px #fff, /* The second layer */
+		        5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		        10px 10px 0 0px #fff, /* The third layer */
+		        10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+
+	.vert-cent {
+		position: relative;
+	    top: 50%;
+	    transform: translateY(-50%);
+	}
+
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+</style>
+
 <html>
-	<head>
-		<title>Hank Quinlan, Horrible Cop</title>
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/cv">CV</a></li>
-        		<li><a href="/blog">Blog</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Hi there, I'm Hank Quinlan!</h1>
-				<p>I'm best known as the horrible cop from <em>A Touch of Evil</em> Don't trust me. <a href="/about">Read more about my life...</a></p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<ul>
-        		<li><a href="mailto:hankquinlanhub@gmail.com">email</a></li>
-        		<li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
-			</ul>
-		</footer>
-	</body>
+<head>
+	<title>SkipConvNet</title>
+	<meta property="og:image" content="./Resources/Images/UTD.png"/>
+	<meta property="og:title" content="SkipConvNet: Skip Convolutional Neural Network for Speech Dereverberation using Optimally Smoothed Spectral Mapping" />
+	<meta property="og:description" content="V. Kothapally's submission to Interspeech 2020." />
+
+</head>
+
+<body><br>
+	<center>
+	  	<span style="font-size:36px"><b>SkipConvNet</b> <br> Skip Convolutional Neural Network for Speech Dereverberation using Optimally Smoothed Spectral Mapping</span><br>
+	  	<td height==25px>&emsp;</td>
+	    <table align=center width=850px><tr>
+	    	<td align=center width=200px><center>
+			<span style="font-size:28px"><a href="https://github.com/vkothapally">Vinay Kothapally</a>,Wei Xia, Shahram Ghorbani, John H.L. Hansen</span><br>
+			<span style="font-size:28px">Wei Xue, Jing Huang</span><br>
+			<table align=center width=100px><tr>
+	            <td width=20px><center><img class="round" style="width:64px" src="./Resources/Images/UTD.png"/></center></td>
+	            <td width=10px>&emsp;</td>
+		        <td width=20px><center><img class="round" style="width:80px" src="./Resources/Images/JDAI.png"/></center></td>
+	        </tr></table><br>
+	      	<span style="font-size:22px">The University of Texas at Dallas in Collaboration with JD AI Research</span><br>
+	  		</center></td>
+	    </tr></table>
+    </center>
+
+	<tr height=10px>&emsp;</tr>
+
+
+    <center><table align=center width=850px><tr>
+        <td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Reverb.png"/></center></td>
+        <td width=20px>&emsp;</td>
+	    <td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_SkipConv.png"/></center></td>
+		<td width=20px>&emsp;</td>
+        <td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Clean.png"/></center></td>
+    </tr></table></center><hr>
+
+
+	<table align=center width=700px>
+  		<center><h1>Abstract</h1></center>
+  		<tr><td align=justify>
+			The reliability of using fully convolutional networks (FCNs) has been successfully demonstrated by recent studies in many speech applications. One of the most popular variant of these FCNs is the `U-Net', which is an encoder-decoder network with skip connections. In this study, we propose `SkipConvNet' where we replace each skip connection with multiple convolutional modules to provide decoder with intuitive feature maps rather than encoder's output to improve the learning capacity of the network. We also propose the use of optimal smoothing of power spectral density (PSD) as a pre-processing step, which helps to further enhance the efficiency of the network. To evaluate our proposed system, we use the REVERB challenge corpus to assess the performance of various enhancement approaches under the same conditions. We focus solely on monitoring improvements in speech quality and their contribution to improving the efficiency of back-end speech systems, such as speech recognition and speaker verification, trained on only clean speech. Experimental findings show that the proposed system consistently outperforms other approaches.
+    	</td></tr>
+	</table><br><hr>
+
+
+    <table align=center width=900><center><h1>Pre-processing: Optimal Smoothing of Power Spectral Density</h1></center>
+		<table align=center width=850px><tr>
+			<td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Reverb_NoPrep.png"/></center></td>
+			<td width=20px>&emsp;</td>
+			<td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Alpha.png"/></center></td>
+			<td width=20px>&emsp;</td>
+			<td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Reverb_Prep.png"/></center></td>
+		</tr></table>
+	</table>
+    <tr height=10px>&emsp;</tr>
+
+    <table align=center width=850>
+        <tr><td align=justify>
+            In  general,  a  fixed  smoothing  parameter  ‘α’  is  used  in speech applications to obtain a smoothed PSD. It is known that having a fixed value often comes with trade-off is-sues  in  estimation.   A  sliding  window  smoothing  mechanism is robust for a higher value of ‘α’ but blurs the active speech and silence boundaries.  On the contrary, abrupt changes in speech activity can be recorded with a lower value of ‘α’ at the cost of a less reliable estimate of PSD. Therefore, we use a time-varying and frequency-dependent ‘Optimal smoothing’ helps in preserving the formant structure during the speech frames by having a low smoothing parameter while assigning the regions with reverberant contents with a higher smoothing parameter. In addition, the smooth PSD values below ‘-80 dB’for all training samples are clipped to have a constant dynamic range across the dataset.
+        </td></tr>
+    </table><br><hr>
+
+
+
+
+    <table align=center width=900>
+    	<center><h1>Network arrchitecture</h1></center>
+	    <tr><td align=center width=900>
+	    	<center><td><img class="round" style="width:900px" src="./Resources/Images/Network.png"/></td></center>
+		</td></tr>
+	</table>
+
+
+    <tr height=10px>&emsp;</tr>
+
+    <table align=center width=1200>
+        <tr><td align=justify>
+            (Input) CL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBR <span>&#8594;</span>  TCDR <span>&#8594;</span>  TCDR <span>&#8594;</span>  TCDR <span>&#8594;</span>  TCR <span>&#8594;</span>  TCR <span>&#8594;</span>  TCR <span>&#8594;</span>  TCR <span>&#8594;</span>  TCT (Output) <br>
+            SkipConv Block : Input <span>&#8594;</span>  LeakyReLU <span>&#8594;</span>  Convolution2D <span>&#8594;</span>  (Residual Connection) <span>&#8594;</span>  Bactchnorm2D <span>&#8594;</span>  Output <br>
+            SkipConv x 4   : 4 SkipConv Blocks in series (SkipConv Block <span>&#8594;</span> SkipConv Block <span>&#8594;</span> SkipConv Block <span>&#8594;</span> SkipConv Block) <br>
+        </td></tr>
+    </table>
+
+    <tr height=10px>&emsp;</tr>
+    <table align=center width=1200>
+        <tr><td align=justify>
+            CL   <span>&#8594;</span>  Convolution2D + LeakyReLU <br>
+            CBL  <span>&#8594;</span>  Convolution2D + BatchNorm2D + LeakyReLU  <br>
+            CBR  <span>&#8594;</span>  Convolution2D + BatchNorm2D + ReLU <br>
+            TCDR <span>&#8594;</span>  TransposeConvolution2D + BatchNorm2D + DropOut + LeakyReLU <br>
+            TCR  <span>&#8594;</span>  TransposeConvolution2D + BatchNorm2D + ReLU <br>
+            TCT  <span>&#8594;</span>  TransposeConvolution2D + Tanh <br>
+        </td></tr>
+    </table><br><hr>
+
+
+
+
+    <table align=center width=850px>
+ 		<center><h1>Audio Samples for Listening</h1></center>
+ 		<tr height=5px>&emsp;</tr>
+
+
+        <table align=center width=850px><left><h2>Far Microphone</h2></left>
+
+
+        <tr>
+			<!-- ############################### Reverberant ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Far (Reverberant)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room1_noprocessing.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Far (Reverberant)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room2_noprocessing.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Far (Reverberant)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room3_noprocessing.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### WPE ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Far (WPE)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room1_wpe.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Far (WPE)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room2_wpe.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Far (WPE)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room3_wpe.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### UNet ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Far (UNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room1_unet.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Far (UNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room2_unet.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Far (UNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room3_unet.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### SkipConvNet ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Far (SkipConvNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room1_skipconv.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Far (SkipConvNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room2_skipconv.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Far (SkipConvNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room3_skipconv.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### Clean  ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Far (Clean-Refernce)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room1_clean_reference.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Far (Clean-Reference)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room2_clean_reference.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Far (Clean-Reference)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/far_room3_clean_reference.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+    	</table>
+
+
+    	<tr height=20px>&emsp;</tr>
+
+
+
+    	<table align=center width=850px><left><h2>Near Microphone</h2></left>
+
+
+        <tr>
+			<!-- ############################### Reverberant ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Near (Reverberant)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room1_noprocessing.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Near (Reverberant)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room2_noprocessing.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Near (Reverberant)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room3_noprocessing.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### WPE ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Near (WPE)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room1_wpe.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Near (WPE)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room2_wpe.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Near (WPE)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room3_wpe.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### UNet ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Near (UNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room1_unet.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Near (UNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room2_unet.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Near (UNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room3_unet.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### SkipConvNet ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Near (SkipConvNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room1_skipconv.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Near (SkipConvNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room2_skipconv.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Near (SkipConvNet)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room3_skipconv.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### Clean  ###################################  -->
+
+			<td width=270px><center><small><b>Room-1 Near (Clean-Refernce)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room1_clean_reference.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-2 Near (Clean-Reference)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room2_clean_reference.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Room-3 Near (Clean-Reference)</b></small>
+			<audio width="150" controls><source src="./Resources/Audio/near_room3_clean_reference.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+    	</table>
+	</table><br><hr>
+
+
+
+
+    <table align=center width=600px>
+ 	    <tr><td><span style="font-size:14pt"><center>
+		  	<a href="https://github.com/vkothapally/SkipConvNet/blob/master/Resources/bibtex_interspeech2020.txt">[Bibtex (Available upon acceptance)]</a>
+        </center></span></td></tr>
+    </table><hr><br>
+
+
+
+
+    <table align=center width=900px>
+		<tr><td width=400px><center><h1>Acknowledgements</h1></center>
+				This project was supported in part by JDAI Research-USA, and partially by the University of Texas at Dallas from the Distinguished University Chair in Telecommunications Engineering held by J. H. L. Hansen.
+		</td></tr>
+	</table><br>
+
+
+</body>
 </html>
+
