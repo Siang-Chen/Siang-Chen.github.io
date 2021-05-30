@@ -123,27 +123,24 @@
 
 <html>
 <head>
-	<title>SkipConvNet</title>
-	<meta property="og:image" content="./Resources/Images/123.png"/>
-	<meta property="og:title" content="SkipConvNet: Skip Convolutional Neural Network for Speech Dereverberation using Optimally Smoothed Spectral Mapping" />
-	<meta property="og:description" content="V. Kothapally's submission to Interspeech 2020." />
+	<title>Multichannel learning-based network for source separation and dereverberation</title>
+	<meta property="og:image" content="./Image/123.png"/>
+	<meta property="og:title" content="Multichannel Learning-Based Approaches for Sound Source Separation in Adverse Environments" />
+	<meta property="og:description" content="Siang-Chen submmit to EURASIP" />
 
 </head>
 
 <body><br>
 	<center>
-	  	<span style="font-size:36px"><b>SkipConvNet</b> <br> Skip Convolutional Neural Network for Speech Dereverberation using Optimally Smoothed Spectral Mapping</span><br>
+	  	<span style="font-size:36px"><br> Multichannel Learning-Based Approaches for Sound Source Separation in Adverse Environments</span><br>
 	  	<td height==25px>&emsp;</td>
 	    <table align=center width=850px><tr>
 	    	<td align=center width=200px><center>
-			<span style="font-size:28px"><a href="https://github.com/vkothapally">Vinay Kothapally</a>,Wei Xia, Shahram Ghorbani, John H.L. Hansen</span><br>
-			<span style="font-size:28px">Wei Xue, Jing Huang</span><br>
+			<span style="font-size:28px">You-Siang Chen,Zi-Jie Lin, Mingsian R. Bai</span><br>
 			<table align=center width=100px><tr>
-	            <td width=20px><center><img class="round" style="width:64px" src="./Resources/Images/UTD.png"/></center></td>
 	            <td width=10px>&emsp;</td>
-		        <td width=20px><center><img class="round" style="width:80px" src="./Resources/Images/JDAI.png"/></center></td>
 	        </tr></table><br>
-	      	<span style="font-size:22px">The University of Texas at Dallas in Collaboration with JD AI Research</span><br>
+	      	<span style="font-size:22px">Department of Power Mechanical Engineering Engineering, National Tsing Hua University, Taiwan</span><br>
 	  		</center></td>
 	    </tr></table>
     </center>
@@ -151,78 +148,33 @@
 	<tr height=10px>&emsp;</tr>
 
 
-    <center><table align=center width=850px><tr>
-        <td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Reverb.png"/></center></td>
+<!--    <center><table align=center width=850px><tr>
+        <td width=270px><center><img class="round" style="width:260px" src="./Image/123.png"/></center></td>
         <td width=20px>&emsp;</td>
-	    <td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_SkipConv.png"/></center></td>
+	    <td width=270px><center><img class="round" style="width:260px" src="./Image/123.png"/></center></td>
 		<td width=20px>&emsp;</td>
-        <td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Clean.png"/></center></td>
-    </tr></table></center><hr>
+        <td width=270px><center><img class="round" style="width:260px" src="./Image/123.png"/></center></td>
+    </tr></table></center><hr>-->
 
 
 	<table align=center width=700px>
   		<center><h1>Abstract</h1></center>
   		<tr><td align=justify>
-			The reliability of using fully convolutional networks (FCNs) has been successfully demonstrated by recent studies in many speech applications. One of the most popular variant of these FCNs is the `U-Net', which is an encoder-decoder network with skip connections. In this study, we propose `SkipConvNet' where we replace each skip connection with multiple convolutional modules to provide decoder with intuitive feature maps rather than encoder's output to improve the learning capacity of the network. We also propose the use of optimal smoothing of power spectral density (PSD) as a pre-processing step, which helps to further enhance the efficiency of the network. To evaluate our proposed system, we use the REVERB challenge corpus to assess the performance of various enhancement approaches under the same conditions. We focus solely on monitoring improvements in speech quality and their contribution to improving the efficiency of back-end speech systems, such as speech recognition and speaker verification, trained on only clean speech. Experimental findings show that the proposed system consistently outperforms other approaches.
+			In this paper, a multichannel learning-based network is proposed for source separation and dereverberation in a reverberant environment. The network can be divided into two parts according to the training strategy. At the first stage, a model based on time-dilated convolution network (TDCN) is established to estimate the array beamforming weights for the multichannel microphone signals. Therefore, the output of the network is formulated by weight-and-sum operation on the basis of real-valued reformulation in the frequency domain. At the second stage, a U-net model is concatenated to the beamforming network to serve as a nonlinear mapping filter for simultaneous separation and dereverberation. In order to achieve better flexibility and performance, we derive the scale invariant mean square error (SI-MSE) as a frequency-domain version of scale invariant signal-to-noise ratio (SI-SNR). Moreover, the combined network is jointly trained with dynamically mixing the speech segments convoluted with room impulse responses (RIRs). Simulations are conducted for comprehensive multisource scenarios including subtending angle of sources and reverberation time (T60). The proposed network along with the baseline approaches are evaluated in terms of several objective evaluation matrices and the results show the effectiveness of the network and better performance on the task of dereverberation and separation.
     	</td></tr>
 	</table><br><hr>
-
-
-    <table align=center width=900><center><h1>Pre-processing: Optimal Smoothing of Power Spectral Density</h1></center>
-		<table align=center width=850px><tr>
-			<td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Reverb_NoPrep.png"/></center></td>
-			<td width=20px>&emsp;</td>
-			<td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Alpha.png"/></center></td>
-			<td width=20px>&emsp;</td>
-			<td width=270px><center><img class="round" style="width:260px" src="./Resources/Images/Spec_Reverb_Prep.png"/></center></td>
-		</tr></table>
-	</table>
-    <tr height=10px>&emsp;</tr>
-
-    <table align=center width=850>
-        <tr><td align=justify>
-            In  general,  a  fixed  smoothing  parameter  ‘α’  is  used  in speech applications to obtain a smoothed PSD. It is known that having a fixed value often comes with trade-off is-sues  in  estimation.   A  sliding  window  smoothing  mechanism is robust for a higher value of ‘α’ but blurs the active speech and silence boundaries.  On the contrary, abrupt changes in speech activity can be recorded with a lower value of ‘α’ at the cost of a less reliable estimate of PSD. Therefore, we use a time-varying and frequency-dependent ‘Optimal smoothing’ helps in preserving the formant structure during the speech frames by having a low smoothing parameter while assigning the regions with reverberant contents with a higher smoothing parameter. In addition, the smooth PSD values below ‘-80 dB’for all training samples are clipped to have a constant dynamic range across the dataset.
-        </td></tr>
-    </table><br><hr>
-
-
 
 
     <table align=center width=900>
     	<center><h1>Network arrchitecture</h1></center>
 	    <tr><td align=center width=900>
-	    	<center><td><img class="round" style="width:900px" src="./Resources/Images/Network.png"/></td></center>
+	    	<center><td><img class="round" style="width:900px" src="./Image/network.png"/></td></center>
 		</td></tr>
-	</table>
-
-
-    <tr height=10px>&emsp;</tr>
-
-    <table align=center width=1200>
-        <tr><td align=justify>
-            (Input) CL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBL <span>&#8594;</span>  CBR <span>&#8594;</span>  TCDR <span>&#8594;</span>  TCDR <span>&#8594;</span>  TCDR <span>&#8594;</span>  TCR <span>&#8594;</span>  TCR <span>&#8594;</span>  TCR <span>&#8594;</span>  TCR <span>&#8594;</span>  TCT (Output) <br>
-            SkipConv Block : Input <span>&#8594;</span>  LeakyReLU <span>&#8594;</span>  Convolution2D <span>&#8594;</span>  (Residual Connection) <span>&#8594;</span>  Bactchnorm2D <span>&#8594;</span>  Output <br>
-            SkipConv x 4   : 4 SkipConv Blocks in series (SkipConv Block <span>&#8594;</span> SkipConv Block <span>&#8594;</span> SkipConv Block <span>&#8594;</span> SkipConv Block) <br>
-        </td></tr>
-    </table>
-
-    <tr height=10px>&emsp;</tr>
-    <table align=center width=1200>
-        <tr><td align=justify>
-            CL   <span>&#8594;</span>  Convolution2D + LeakyReLU <br>
-            CBL  <span>&#8594;</span>  Convolution2D + BatchNorm2D + LeakyReLU  <br>
-            CBR  <span>&#8594;</span>  Convolution2D + BatchNorm2D + ReLU <br>
-            TCDR <span>&#8594;</span>  TransposeConvolution2D + BatchNorm2D + DropOut + LeakyReLU <br>
-            TCR  <span>&#8594;</span>  TransposeConvolution2D + BatchNorm2D + ReLU <br>
-            TCT  <span>&#8594;</span>  TransposeConvolution2D + Tanh <br>
-        </td></tr>
-    </table><br><hr>
-
-
+	</table><br><hr>
 
 
     <table align=center width=850px>
- 		<center><h1>Audio Samples for Listening</h1></center>
+ 		<center><h1>Audio Demo</h1></center>
  		<tr height=5px>&emsp;</tr>
 
 
@@ -474,9 +426,6 @@
 
 
     <table align=center width=600px>
- 	    <tr><td><span style="font-size:14pt"><center>
-		  	<a href="https://github.com/vkothapally/SkipConvNet/blob/master/Resources/bibtex_interspeech2020.txt">[Bibtex (Available upon acceptance)]</a>
-        </center></span></td></tr>
     </table><hr><br>
 
 
@@ -484,7 +433,7 @@
 
     <table align=center width=900px>
 		<tr><td width=400px><center><h1>Acknowledgements</h1></center>
-				This project was supported in part by JDAI Research-USA, and partially by the University of Texas at Dallas from the Distinguished University Chair in Telecommunications Engineering held by J. H. L. Hansen.
+				The work was supported by the Add-on Grant for International Cooperation (MAGIC) of the Ministry of Science and Technology (MOST) in Taiwan, under the project number 107-2221-E-007 -039 -MY3.
 		</td></tr>
 	</table><br>
 
