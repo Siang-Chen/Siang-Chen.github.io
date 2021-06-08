@@ -132,7 +132,7 @@
 
 <body><br>
 	<center>
-	  	<span style="font-size:36px"><br> Multichannel Learning-Based Approaches for Sound Source Separation in Adverse Environments</span><br>
+	  	<span style="font-size:36px"><br> A Multichannel Learning-Based Approach for Sound Source Separation in Reverberant Environments</span><br>
 	  	<td height==25px>&emsp;</td>
 	    <table align=center width=850px><tr>
 	    	<td align=center width=200px><center>
@@ -160,7 +160,7 @@
 	<table align=center width=700px>
   		<center><h1>Abstract</h1></center>
   		<tr><td align=justify>
-			In this paper, a multichannel learning-based network is proposed for source separation and dereverberation in a reverberant environment. The network can be divided into two parts according to the training strategy. At the first stage, a model based on time-dilated convolution network (TDCN) is established to estimate the array beamforming weights for the multichannel microphone signals. Therefore, the output of the network is formulated by weight-and-sum operation on the basis of real-valued reformulation in the frequency domain. At the second stage, a U-net model is concatenated to the beamforming network to serve as a nonlinear mapping filter for simultaneous separation and dereverberation. In order to achieve better flexibility and performance, we derive the scale invariant mean square error (SI-MSE) as a frequency-domain version of scale invariant signal-to-noise ratio (SI-SNR). Moreover, the combined network is jointly trained with dynamically mixing the speech segments convoluted with room impulse responses (RIRs). Simulations are conducted for comprehensive multisource scenarios including subtending angle of sources and reverberation time (T60). The proposed network along with the baseline approaches are evaluated in terms of several objective evaluation matrices and the results show the effectiveness of the network and better performance on the task of dereverberation and separation.
+			In this paper, a multichannel learning-based network is proposed for sound source separation in reverberant field. The network can be divided into two parts according to the training strategies. In the first stage, a time-dilated convolution network (TDCN) is trained to estimate the array weights for beamforming the multichannel microphone signals. Next, the output of the network is processed by a weight-and-sum operation that is reformulated to handle real-valued data in the frequency domain. In the second stage, a U-net model is concatenated to the beamforming network (BF-net) to serve as a nonlinear mapping filter for joint separation and dereverberation. The scale invariant mean square error (SI-MSE) that is a frequency-domain modification from the scale invariant signal-to-noise ratio (SI-SNR) is used as the objective function for training. Furthermore, the combined network is also trained with the speech segments filtered by a great variety of room impulse responses (RIRs). Simulations are conducted for comprehensive multisource scenarios of various subtending angles of sources and reverberation times (T60). The proposed network is compared with several baseline approaches in terms of objective evaluation matrices. The results have demonstrated the excellent performance of the proposed network in dereverberation and separation, as compared to baseline methods.
     	</td></tr>
 	</table><br><hr>
 
