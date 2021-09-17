@@ -160,7 +160,7 @@
 	<table align=center width=700px>
   		<center><h1>Abstract</h1></center>
   		<tr><td align=justify>
-			In this paper, a multichannel learning-based network is proposed for sound source separation in reverberant field. The network can be divided into two parts according to the training strategies. In the first stage, a time-dilated convolution network (TDCN) is trained to estimate the array weights for beamforming the multichannel microphone signals. Next, the output of the network is processed by a weight-and-sum operation that is reformulated to handle real-valued data in the frequency domain. In the second stage, a U-net model is concatenated to the beamforming network (BF-net) to serve as a nonlinear mapping filter for joint separation and dereverberation. The scale invariant mean square error (SI-MSE) that is a frequency-domain modification from the scale invariant signal-to-noise ratio (SI-SNR) is used as the objective function for training. Furthermore, the combined network is also trained with the speech segments filtered by a great variety of room impulse responses (RIRs). Simulations are conducted for comprehensive multisource scenarios of various subtending angles of sources and reverberation times (T60). The proposed network is compared with several baseline approaches in terms of objective evaluation matrices. The results have demonstrated the excellent performance of the proposed network in dereverberation and separation, as compared to baseline methods.
+			In this paper, a multichannel learning-based network is proposed for sound source separation in reverberant field. The network can be divided into two parts according to the training strategies. In the first stage, time-dilated convolutional blocks are trained to estimate the array weights for beamforming the multichannel microphone signals. Next, the output of the network is processed by a weight-and-sum operation that is reformulated to handle real-valued data in the frequency domain. In the second stage, a U-net model is concatenated to the beamforming network to serve as a nonlinear mapping filter for joint separation and dereverberation. The scale invariant mean square error (SI-MSE) that is a frequency-domain modification from the scale invariant signal-to-noise ratio (SI-SNR) is used as the objective function for training. Furthermore, the combined network is also trained with the speech segments filtered by a great variety of room impulse responses. Simulations are conducted for comprehensive multisource scenarios of various subtending angles of sources and reverberation times. The proposed network is compared with several baseline approaches in terms of objective evaluation matrices. The results have demonstrated the excellent performance of the proposed network in dereverberation and separation, as compared to baseline methods.
     	</td></tr>
 	</table><br><hr>
 
@@ -295,6 +295,37 @@
 			<td width=20px>&emsp;</td>
 			
 			<td width=270px><center><small><b>WPE+IVA (T60 = 0.9 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/IVA090_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/IVA090_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+		
+	<tr>
+			<!-- ############################### Beam-TasNet ###################################  -->
+
+			<td width=270px><center><small><b>Beam-TasNet (T60 = 0.16 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/IVA016_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/IVA016_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Beam-TasNet (T60 = 0.36 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/IVA036_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/IVA036_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Beam-TasNet (T60 = 0.61 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/IVA061_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/IVA061_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>Beam-TasNet (T60 = 0.9 s)</b></small>
 			<audio width="150" controls><source src="./Audio/T60/IVA090_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
 			<audio width="150" controls><source src="./Audio/T60/IVA090_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
 			</center></td>
@@ -491,6 +522,37 @@
 			<td width=20px>&emsp;</td>
 			
 			<td width=270px><center><small><b>WPE+IVA (90-180)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang3_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang3_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+		
+	<tr>
+			<!-- ############################### Beam-TasNet ###################################  -->
+
+			<td width=270px><center><small><b>Beam-TasNet (0-15)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang0_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang0_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Beam-TasNet (15-45)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang1_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang1_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Beam-TasNet (45-90)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang2_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang2_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>Beam-TasNet (90-180)</b></small>
 			<audio width="150" controls><source src="./Audio/Ang/IVA_ang3_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
 			<audio width="150" controls><source src="./Audio/Ang/IVA_ang3_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
 			</center></td>
