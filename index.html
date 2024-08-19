@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1300px;
+	}
+
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+
+	h2 {
+		font-size:28px;
+		font-weight:250;
+	}
+
+	.disclaimerbox {
+		background-color: #eee;
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	img.header-img {
+		height: 100%;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	img.rounded {
+		height: 100%;
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+
+	td.dl-link {
+		height: 160px;
+		text-align: justify; /* For Edge */
+  		font-size: 22px;
+	}
+
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		        0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		        5px 5px 0 0px #fff, /* The second layer */
+		        5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		        10px 10px 0 0px #fff, /* The third layer */
+		        10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		        15px 15px 0 0px #fff, /* The fourth layer */
+		        15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		        20px 20px 0 0px #fff, /* The fifth layer */
+		        20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		        25px 25px 0 0px #fff, /* The fifth layer */
+		        25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		        0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		        0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		        5px 5px 0 0px #fff, /* The second layer */
+		        5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		        10px 10px 0 0px #fff, /* The third layer */
+		        10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+
+	.vert-cent {
+		position: relative;
+	    top: 50%;
+	    transform: translateY(-50%);
+	}
+
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+</style>
+
+<html>
+<head>
+	<title>Multichannel learning-based network for source separation and dereverberation</title>
+	<meta property="og:image" content="./Image/123.png"/>
+	<meta property="og:title" content="Multichannel Learning-Based Approaches for Sound Source Separation in Adverse Environments" />
+	<meta property="og:description" content="Siang-Chen submmit to EURASIP" />
+
+</head>
+
+<body><br>
+	<center>
+	  	<span style="font-size:36px"><br> A Multichannel Learning-Based Approach for Sound Source Separation in Reverberant Environments</span><br>
+	  	<td height==25px>&emsp;</td>
+	    <table align=center width=850px><tr>
+	    	<td align=center width=200px><center>
+			<span style="font-size:28px">You-Siang Chen,Zi-Jie Lin, Mingsian R. Bai</span><br>
+			<table align=center width=100px><tr>
+	            <td width=10px>&emsp;</td>
+	        </tr></table><br>
+	      	<span style="font-size:22px">Department of Power Mechanical Engineering Engineering, National Tsing Hua University, Taiwan</span><br>
+	  		</center></td>
+	    </tr></table>
+    </center>
+
+	<tr height=10px>&emsp;</tr>
+
+
+<!--    <center><table align=center width=850px><tr>
+        <td width=270px><center><img class="round" style="width:260px" src="./Image/123.png"/></center></td>
+        <td width=20px>&emsp;</td>
+	    <td width=270px><center><img class="round" style="width:260px" src="./Image/123.png"/></center></td>
+		<td width=20px>&emsp;</td>
+        <td width=270px><center><img class="round" style="width:260px" src="./Image/123.png"/></center></td>
+    </tr></table></center><hr>-->
+
+
+	<table align=center width=700px>
+  		<center><h1>Abstract</h1></center>
+  		<tr><td align=justify>
+			In this paper, a multichannel learning-based network is proposed for sound source separation in reverberant field. The network can be divided into two parts according to the training strategies. In the first stage, time-dilated convolutional blocks are trained to estimate the array weights for beamforming the multichannel microphone signals. Next, the output of the network is processed by a weight-and-sum operation that is reformulated to handle real-valued data in the frequency domain. In the second stage, a U-net model is concatenated to the beamforming network to serve as a nonlinear mapping filter for joint separation and dereverberation. The scale invariant mean square error (SI-MSE) that is a frequency-domain modification from the scale invariant signal-to-noise ratio (SI-SNR) is used as the objective function for training. Furthermore, the combined network is also trained with the speech segments filtered by a great variety of room impulse responses. Simulations are conducted for comprehensive multisource scenarios of various subtending angles of sources and reverberation times. The proposed network is compared with several baseline approaches in terms of objective evaluation matrices. The results have demonstrated the excellent performance of the proposed network in dereverberation and separation, as compared to baseline methods.
+    	</td></tr>
+	</table><br><hr>
+
+
+    <table align=center width=900>
+    	<center><h1>Network arrchitecture</h1></center>
+	    <tr><td align=center width=900>
+	    	<center><td><img class="round" style="width:900px" src="./Image/network.png"/></td></center>
+		</td></tr>
+	</table><br><hr>
+
+
+    <table align=center width=850px>
+ 		<center><h1>Audio Demo</h1></center>
+	    	<center><h1>(Six-channel uniform circular array)</h1></center>
+ 		<tr height=5px>&emsp;</tr>
+
+
+        <table align=center width=850px><left><h2>Category A: T60s</h2></left>
+
+
+        <tr>
+			<!-- ############################### Reverberant ###################################  -->
+
+			<td width=270px><center><small><b>Speech mixture (T60 = 0.16 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/mix016.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Speech mixture (T60 = 0.36 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/mix036.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Speech mixture (T60 = 0.61 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/mix061.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>Speech mixture (T60 = 0.9 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/mix090.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### WPE + MPDR ###################################  -->
+
+			<td width=270px><center><small><b>WPE+MPDR (T60 = 0.16 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/MPDR016_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/MPDR016_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+MPDR (T60 = 0.36 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/MPDR036_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/MPDR036_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+MPDR (T60 = 0.61 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/MPDR061_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/MPDR061_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>WPE+MPDR (T60 = 0.9 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/MPDR090_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/MPDR090_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### WPE + TIKR ###################################  -->
+
+			<td width=270px><center><small><b>WPE+TIKR (T60 = 0.16 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/TIKR016_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/TIKR016_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+TIKR (T60 = 0.36 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/TIKR036_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/TIKR036_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+TIKR (T60 = 0.61 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/TIKR061_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/TIKR061_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>WPE+TIKR (T60 = 0.9 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/TIKR090_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/TIKR090_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### WPE + IVA ###################################  -->
+
+			<td width=270px><center><small><b>WPE+IVA (T60 = 0.16 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/IVA016_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/IVA016_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+IVA (T60 = 0.36 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/IVA036_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/IVA036_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+IVA (T60 = 0.61 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/IVA061_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/IVA061_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>WPE+IVA (T60 = 0.9 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/IVA090_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/IVA090_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+		
+	<tr>
+			<!-- ############################### Beam-TasNet ###################################  -->
+
+			<td width=270px><center><small><b>Beam-TasNet (T60 = 0.16 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/BeamTasNet016_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/BeamTasNet016_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Beam-TasNet (T60 = 0.36 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/BeamTasNet036_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/BeamTasNet036_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Beam-TasNet (T60 = 0.61 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/BeamTasNet061_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/BeamTasNet061_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>Beam-TasNet (T60 = 0.9 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/BeamTasNet090_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/BeamTasNet090_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+		
+		<tr>
+			<!-- ############################### Proposed ###################################  -->
+
+			<td width=270px><center><small><b>The proposed approach (T60 = 0.16 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/proposed_016dy_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/proposed_016dy_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>The proposed approach (T60 = 0.36 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/proposed_036dy_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/proposed_036dy_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>The proposed approach (T60 = 0.61 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/proposed_061dy_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/proposed_061dy_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>The proposed approach (T60 = 0.9 s)</b></small>
+			<audio width="150" controls><source src="./Audio/T60/proposed_090dy_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/proposed_090dy_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### Clean ###################################  -->
+
+			<td width=270px><center><small><b>Clean signals</b></small>
+			<audio width="150" controls><source src="./Audio/T60/clean016_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/clean016_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Clean signals</b></small>
+			<audio width="150" controls><source src="./Audio/T60/clean036_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/clean036_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Clean signals</b></small>
+			<audio width="150" controls><source src="./Audio/T60/clean061_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/clean061_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>Clean signals</b></small>
+			<audio width="150" controls><source src="./Audio/T60/clean090_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/T60/clean090_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+    	</table>
+
+
+    	<tr height=20px>&emsp;</tr>
+
+
+
+    	<table align=center width=850px><left><h2>Category B: subtending angles</h2></left>
+
+
+        <tr>
+			<!-- ############################### Reverberant (Angles) ###################################  -->
+
+			<td width=270px><center><small><b>Speech mixture (0-15)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/mix_ang0.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Speech mixture (15-45)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/mix_ang1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Speech mixture (45-90)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/mix_ang2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>Speech mixture (90-180)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/mix_ang3.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### WPE+MPDR ###################################  -->
+
+			<td width=270px><center><small><b>WPE+MPDR (0-15)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/MPDR_ang0_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/MPDR_ang0_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+MPDR (15-45)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/MPDR_ang1_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/MPDR_ang1_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+MPDR (45-90)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/MPDR_ang2_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/MPDR_ang2_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>WPE+MPDR (90-180)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/MPDR_ang3_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/MPDR_ang3_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### WPE+TIKR ###################################  -->
+
+			<td width=270px><center><small><b>WPE+TIKR (0-15)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/TIKR_ang0_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/TIKR_ang0_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+TIKR (15-45)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/TIKR_ang1_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/TIKR_ang1_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+TIKR (45-90)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/TIKR_ang2_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/TIKR_ang2_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>WPE+TIKR (90-180)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/TIKR_ang3_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/TIKR_ang3_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### WPE+IVA ###################################  -->
+
+			<td width=270px><center><small><b>WPE+IVA (0-15)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang0_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang0_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+IVA (15-45)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang1_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang1_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>WPE+IVA (45-90)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang2_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang2_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>WPE+IVA (90-180)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang3_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/IVA_ang3_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+		
+	<tr>
+			<!-- ############################### Beam-TasNet ###################################  -->
+
+			<td width=270px><center><small><b>Beam-TasNet (0-15)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/BeamTasNet_ang0_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/BeamTasNet_ang0_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Beam-TasNet (15-45)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/BeamTasNet_ang1_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/BeamTasNet_ang1_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Beam-TasNet (45-90)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/BeamTasNet_ang2_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/BeamTasNet_ang2_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>Beam-TasNet (90-180)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/BeamTasNet_ang3_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/BeamTasNet_ang3_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+		
+		<tr>
+			<!-- ############################### The best proposed model ###################################  -->
+
+			<td width=270px><center><small><b>The proposed approach (0-15)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/proposed_ang0_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/proposed_ang0_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>The proposed approach (15-45)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/proposed_ang1_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/proposed_ang1_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>The proposed approach (45-90)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/proposed_ang2_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/proposed_ang2_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>The proposed approach (90-180)</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/proposed_ang3_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/proposed_ang3_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+
+        <tr>
+			<!-- ############################### Clean ###################################  -->
+
+			<td width=270px><center><small><b>Clean signals</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/clean_ang0_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/clean_ang0_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Clean signals</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/clean_ang1_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/clean_ang1_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+			<td width=270px><center><small><b>Clean signals</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/clean_ang2_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/clean_ang2_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+			
+			<td width=270px><center><small><b>Clean signals</b></small>
+			<audio width="150" controls><source src="./Audio/Ang/clean_ang3_1.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			<audio width="150" controls><source src="./Audio/Ang/clean_ang3_2.wav" type="audio/wav" >Your browser does not support the audio element.</audio>
+			</center></td>
+			<td width=20px>&emsp;</td>
+
+
+            <td height=5px>&emsp;</td>
+        </tr>
+
+    	</table>
+	</table><br><hr>
+
+
+
+
+    <table align=center width=600px>
+    </table><hr><br>
+
+
+
+
+    <table align=center width=900px>
+		<tr><td width=400px><center><h1>Acknowledgements and fundings</h1></center>
+				The work was supported by the Add-on Grant for International Cooperation (MAGIC) of the Ministry of Science and Technology (MOST) in Taiwan, under the project number 107-2221-E-007 -039 -MY3.This grant made possible a three-month visit of Dr. Mingsian Bai to the LMS, FAU, Erlangen-Nuremberg.
+		</td></tr>
+	</table><br>
+
+
+</body>
+</html>
+
