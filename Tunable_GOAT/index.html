@@ -123,20 +123,20 @@
 
 <html>
 <head>'
-	<title>Realization of global audio telepresence via a learning-based model matching loudspeaker array system</title>
+	<title>A learning-based model matching framework for tunable global audio telepresence</title>
 	<meta property="og:image" content="./Image/123.png"/>
-	<meta property="og:title" content="Realization of global audio telepresence via a learning-based model matching loudspeaker array system" />
-	<meta property="og:description" content="Siang-Chen submmit to Internoise" />
+	<meta property="og:title" content="A learning-based model matching framework for tunable global audio telepresence" />
+	<meta property="og:description" content="Siang-Chen submmit to ICA2025" />
 
 </head>
 
 <body><br>
 	<center>
-	  	<span style="font-size:36px"><br> Realization of global audio telepresence via a learning-based model matching loudspeaker array system</span><br>
+	  	<span style="font-size:36px"><br> A learning-based model matching framework for tunable global audio telepresence</span><br>
 	  	<td height==25px>&emsp;</td>
 	    <table align=center width=850px><tr>
 	    	<td align=center width=200px><center>
-			<span style="font-size:28px">You-Siang Chen,Sing-Yu Chen, and Mingsian R. Bai</span><br>
+			<span style="font-size:28px">You-Siang Chen,Chin-Yen Wang, and Mingsian R. Bai</span><br>
 			<table align=center width=100px><tr>
 	            <td width=10px>&emsp;</td>
 	        </tr></table><br>
@@ -160,13 +160,13 @@
 	<table align=center width=700px>
   		<center><h1>Abstract</h1></center>
   		<tr><td align=justify>
-			A Global Audio Telepresence (GOAT) system requires a microphone array to capture the spatial audio signals in the far end and a loudspeaker array to reconstruct the sound field in the near end. This seamlessly immerses near-end users in remote audio scenes with full ambience. In this paper, we use a learning-based GOAT system (L-GOAT) based on the model-matching principle, where a deep neural network (DNN) acts as non-linear filters for the GOAT system. The network training attempts to minimize the matching error between the signals reproduced by the DNN and the desired signals filtered by the far-end acoustic transfer functions (ATFs). Extensive simulations were carried out for multi-source scenarios in two different rooms with different reverberation times. To implement the L-GOAT system, a five-microphone linear array was adopted in the far-end room, while a six-loudspeaker array was utilized in the near-end room. The objective evaluation matrices, including the Perceptual Evaluation of Speech Quality (PESQ), Short-Time Objective Intelligibility (STOI), and the matching errors, were conducted to validate the efficacy of the GOAT systems. The proposed learning-based approach has demonstrated superior performance compared to a conventional digital signal processing (DSP)-based method.
+			This study presents a Learning-based Tunable GlObal Audio Telepresence (LT-GOAT) system to bring the near end users to the virtual far end, with a tunable balance between the target source field and the ambient field consisting of interference and late reverberation for acoustic array systems. The system can seamlessly vary between 'Enhanced' mode for speech quality and 'Immersive' mode for spatial ambience. The far-end audio signals are captured by a microphone array, and then a neural network is pre-trained to separate the target source field and ambient sound. Another network is then implemented to perform multichannel filtering based on the model matching principle. The training process minimizes the matching error between the synthesized sound field and the desired sound field at the control points situated virtually at the far end. Simulations were conducted for the LT-GOAT system involving a four-microphone array at the far end and a six-loudspeaker array in the near end. A target source and an interferer at the far end were studied under various reverberation conditions. Performance was assessed using objective metrics including Perceptual Evaluation of Speech Quality (PESQ), Short-Time Objective Intelligibility (STOI) and matching errors. The results showed that the proposed system outperformed conventional baselines.
     	</td></tr>
 	</table><br><hr>
 
 
     <table align=center width=500>
-		<center><h1>GOAT</h1></center>
+		<center><h1>Proposed framework</h1></center>
 	    <tr><td align=center width=500>
 	    	<center><td><img class="round" style="width:500px" src="./Image/GOAT.png"/></td></center>
 		</td></tr>
@@ -174,7 +174,7 @@
 	</table><br><hr>
 	
 	<table align=center width=900>
-		<center><h1>L-GOAT</h1></center>
+		<center><h1>Training of Enhancement-Immersive modules (EIM) </h1></center>
 	    <tr><td align=center width=900>
 	    	<center><td><img class="round" style="width:900px" src="./Image/LGOAT.png"/></td></center>
 		</td></tr>
@@ -184,14 +184,6 @@
     <table align=center width=850px>
  		<center><h1>Audio Demo</h1></center>
  		<tr height=5px>&emsp;</tr>
-		
-		<table align=center width=250>
-			<tr><td align=left width=250>
-				</left><td><img class="round" style="width:250px" src="./Image/Nearend1.png"/></td></left>
-				</right><td><img class="round" style="width:250px" src="./Image/exp.png"/></td></right>
-			</td></tr>
-			
-		</table><br>
 		
 		<center><td align=justify>
 			The demo is presented using headphones, and the audio file was recorded within the control zone.
