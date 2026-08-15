@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tunable Audio Telepresence</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --rule: #c9ccd1;
+    --accent: #1d4ed8;
+    --note-bg: #fef9e7;
+    --note-line: #eab308;
+    --tgt: #1d4ed8;
+    --int: #dc2626;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181c;
+      --fg: #e8e8e8;
+      --muted: #9aa0a8;
+      --line: #2e3238;
+      --rule: #3d424a;
+      --accent: #7aa2f7;
+      --note-bg: #2a2616;
+      --note-line: #a1861f;
+      --tgt: #7aa2f7;
+      --int: #f87171;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem 5rem;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-text-size-adjust: 100%;
+  }
+  /* 1280 = the natural width of the tables below (see th.cp / th.mt / .cell img),
+     so the prose and the tables share one right edge. */
+  main { max-width: 1280px; margin: 0 auto; }
+  h1 { font-size: 1.75rem; line-height: 1.3; margin: 0 0 1rem; }
+  .sub { color: var(--muted); margin: 0 0 1.75rem; }
+  a { color: var(--accent); }
+  /* No max-width on the prose: it is aligned to the width of the tables below,
+     so the page has a single right edge instead of two. */
+  p { margin: 0 0 1rem; }
+  code {
+    background: var(--line);
+    padding: .1em .35em;
+    border-radius: 3px;
+    font-size: .9em;
+  }
+
+  .note {
+    background: var(--note-bg);
+    border-left: 4px solid var(--note-line);
+    padding: .85rem 1rem;
+    border-radius: 4px;
+    margin: 0 0 1.75rem;
+  }
+
+  nav.cases {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0 0 2.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  nav.cases a {
+    font-size: .875rem;
+    padding: .3rem .7rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  nav.cases a:hover { border-color: var(--accent); }
+
+  section.case { margin: 0 0 4rem; scroll-margin-top: 1rem; }
+  .case-head {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin: 0 0 1rem;
+  }
+  .case-head h2 { font-size: 1.15rem; margin: 0; }
+  /* Source configuration not present in the training set */
+  .unseen {
+    margin-left: .4rem;
+    font-size: .85rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .geo { flex: none; display: block; }
+  .meta {
+    color: var(--muted);
+    font-weight: 400;
+    font-size: .9rem;
+  }
+  .c-tgt { color: var(--tgt); font-weight: 600; }
+  .c-int { color: var(--int); font-weight: 600; }
+
+  /* Rule-free layout: columns are separated by whitespace and alignment. Only two
+     hairlines remain -- under the header row, and between the far-end and near-end
+     control point groups. */
+  .table-wrap { overflow-x: auto; padding-bottom: .25rem; }
+  table {
+    border-collapse: separate;
+    border-spacing: 12px 10px;
+    margin: -12px -12px 0;      /* cancel the outer gutter from border-spacing */
+  }
+  th, td { border: none; padding: 0; vertical-align: middle; }
+
+  thead th {
+    font-weight: 600;
+    font-size: .9rem;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1.3;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  thead .alpha {
+    display: block;
+    font-weight: 400;
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  tbody tr.group-end td,
+  tbody tr.group-end th { border-bottom: 1px solid var(--rule); padding-bottom: 12px; }
+  tbody tr.group-start td,
+  tbody tr.group-start th { padding-top: 6px; }
+
+  /* Fixed label-column widths keep the table width deterministic (145 + 95 +
+     5×190 + 6×12 spacing + 16 padding = 1278px) so it lines up with the prose. */
+  th.cp {
+    width: 145px;
+    text-align: left;
+    font-weight: 600;
+    font-size: .85rem;
+    line-height: 1.35;
+    color: var(--muted);
+    padding-right: .5rem;
+  }
+  th.mt {
+    width: 95px;
+    text-align: left;
+    font-weight: 600;
+    font-size: .9rem;
+    white-space: nowrap;
+    padding-right: .5rem;
+  }
+
+  .cell img {
+    display: block;
+    width: 190px;
+    height: 73px;       /* = --spec-height / 2 (PNG is 2x for hi-dpi screens) */
+    border-radius: 3px;
+    background: var(--line);
+  }
+  .cell audio {
+    display: block;
+    width: 190px;
+    height: 30px;
+    margin-top: .35rem;
+  }
+  .missing {
+    display: block;
+    width: 190px;
+    color: var(--muted);
+    font-size: .8rem;
+    font-style: italic;
+  }
+
+  #experiment { margin: 1rem 0 0; scroll-margin-top: 1rem; }
+  #experiment h2 {
+    font-size: 1.15rem;
+    margin: 0 0 .6rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  #expvid {
+    display: block;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;           /* centred; the jump row below follows suit */
+    border-radius: 4px;
+    background: #000;
+  }
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    margin: .85rem 0 0;
+  }
+  .jump span { font-size: .875rem; color: var(--muted); }
+  .jump button {
+    font: inherit;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: inherit;
+    background: none;
+    padding: .3rem .75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .jump button:hover { border-color: var(--accent); }
+  .jump button em {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: .35rem;
+  }
+
+  #empty {
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: .875rem;
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <h1>Tunable Audio Telepresence</h1>
+  <div class="note">Please listen with headphones.</div>
+
+  <nav class="cases" id="nav"></nav>
+  <div id="cases"></div>
+  <div id="empty" hidden>
+    No audio yet. Run <code>make_demo.py</code> to generate <code>manifest.js</code>
+    and <code>audio/</code>, and this page will populate itself.
+  </div>
+
+  <!-- Hidden until the file loads, so a missing video leaves no broken player. -->
+  <section id="experiment" hidden>
+    <h2>Experiment</h2>
+    <video id="expvid" controls preload="metadata" playsinline
+           src="video/experiment_demo.mp4"></video>
+    <div class="jump">
+      <span>Jump to</span>
+      <button type="button" data-t="0">Enhancement <em>0:00</em></button>
+      <button type="button" data-t="36">Panorama <em>0:36</em></button>
+      <button type="button" data-t="72">Mixture <em>1:12</em></button>
+    </div>
+  </section>
+
+  <footer>
+    <p>Last updated: <span id="updated">—</span></p>
+  </footer>
+
+</main>
+
+<!-- manifest.js is generated by make_demo.py. It is loaded with a <script> tag rather
+     than fetch() so that opening this file over file:// still works (fetch would be
+     blocked by CORS). -->
+<script src="manifest.js" onerror="window.__manifestMissing = true"></script>
+<script>
+(function build() {
+  const M = window.DEMO_MANIFEST;
+  const navEl = document.getElementById("nav");
+  const wrap = document.getElementById("cases");
+
+  if (!M || !M.cases || !M.cases.length) {
+    document.getElementById("empty").hidden = false;
+    return;
+  }
+
+  // Top-down geometry sketch, drawn from the two angles in the manifest.
+  // Convention (matches compass5.ls_positions): 0° points right and angles increase
+  // counter-clockwise. The listener is at the centre, where the four-microphone array
+  // sits; the far-end array offset is deliberately not drawn.
+  // Angles in the manifest keep the array convention used by the processing code:
+  // 0° points right and increases counter-clockwise, so straight ahead is 90°.
+  // The page displays them front-referenced instead -- 0° straight ahead, positive
+  // clockwise -- which puts the sources in [-90°, +90°]. Only the labels change;
+  // the drawn positions are identical either way.
+  const toFront = (d) => 90 - d;
+  const fmt = (d) => `${toFront(d)}°`;
+
+  const ZONE = [60, 120];          // array convention, as above (= -30°..+30° front)
+
+  // Source configurations covered by the training set, as [in-zone, out-of-zone]
+  // counts. Anything else is flagged "(unseen)" on the case heading.
+  const SEEN = [[1, 1], [2, 0]];
+  // tgts / itfs are arrays: some cases have more than one talker per role.
+  // `inside` / `outside` are angles split by the target zone, not by the dataset's
+  // target/interferer annotation -- the zone is what the algorithms actually act on.
+  const geometryIcon = (inside, outside) => {
+    // Extra width over height leaves room for the -90/+90 labels beside the circle.
+    const W = 140, H = 110, cx = 70, cy = 58, r = 38;
+    const xy = (deg, rad = r) => {
+      const a = (deg * Math.PI) / 180;
+      // SVG's y axis points down, hence the minus on the sine
+      return [cx + rad * Math.cos(a), cy - rad * Math.sin(a)];
+    };
+    const f = (n) => n.toFixed(2);
+    const [zx1, zy1] = xy(ZONE[0]);
+    const [zx2, zy2] = xy(ZONE[1]);
+    // sweep-flag 0 = counter-clockwise on screen, so the wedge passes through 90°
+    const wedge = `M ${cx} ${cy} L ${f(zx1)} ${f(zy1)} ` +
+                  `A ${r} ${r} 0 0 0 ${f(zx2)} ${f(zy2)} Z`;
+
+    const ticks = [0, 90, 180, 270].map((d) => {
+      const [x1, y1] = xy(d, r - 3);
+      const [x2, y2] = xy(d, r + 3);
+      return `<line x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}"
+                    stroke="var(--rule)" stroke-width="1"/>`;
+    }).join("");
+
+    // Front-referenced tick labels: 0° ahead, +90° right, -90° left.
+    const labels = [
+      ["0°", cx, cy - r - 6, "middle"],
+      ["+90°", cx + r + 6, cy + 3.5, "start"],
+      ["-90°", cx - r - 6, cy + 3.5, "end"],
+    ].map(([t, x, y, anchor]) =>
+      `<text x="${f(x)}" y="${f(y)}" text-anchor="${anchor}" font-size="9.5"
+             fill="var(--muted)">${t}</text>`).join("");
+
+    const m = 2.7, w = 3.4;
+    const mics = [[-m, -m], [m, -m], [-m, m], [m, m]].map(([dx, dy]) =>
+      `<rect x="${f(cx + dx - w / 2)}" y="${f(cy + dy - w / 2)}" width="${w}"
+             height="${w}" rx=".7" fill="var(--fg)"/>`).join("");
+
+    const dot = (deg, color) => {
+      const [x, y] = xy(deg);
+      return `<circle cx="${f(x)}" cy="${f(y)}" r="5" fill="${color}"
+                      stroke="var(--bg)" stroke-width="1.5"/>`;
+    };
+
+    // Each source is annotated with its own angle, in the dot's colour. The label
+    // sits just outside the circle, anchored away from the centre so it never
+    // overlaps the dot.
+    const dotLabel = (deg, color) => {
+      const [x, y] = xy(deg, r + 9);
+      const front = toFront(deg);
+      const anchor = Math.abs(x - cx) < 6 ? "middle" : (x > cx ? "start" : "end");
+      const dy = y < cy ? -1 : 5;      // nudge below the dot on the lower half
+      return `<text x="${f(x)}" y="${f(y + dy)}" text-anchor="${anchor}"
+                    font-size="10" font-weight="600" fill="${color}"
+              >${front > 0 ? "+" : ""}${front}°</text>`;
+    };
+
+    return `<svg class="geo" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"
+                 aria-hidden="true">
+      <path d="${wedge}" fill="var(--note-line)" fill-opacity=".18"/>
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--rule)"
+              stroke-width="1" stroke-dasharray="4 4"/>
+      ${ticks}${labels}${mics}
+      ${outside.map((d) => dot(d, "var(--int)")).join("")}
+      ${inside.map((d) => dot(d, "var(--tgt)")).join("")}
+      ${outside.map((d) => dotLabel(d, "var(--int)")).join("")}
+      ${inside.map((d) => dotLabel(d, "var(--tgt)")).join("")}
+    </svg>`;
+  };
+
+  // A cell is {audio, image}; older manifests stored a bare audio path.
+  const mediaCell = (cell) => {
+    const td = document.createElement("td");
+    td.className = "cell";
+    const c = typeof cell === "string" ? { audio: cell } : (cell || {});
+    if (!c.audio && !c.image) {
+      td.innerHTML = '<span class="missing">—</span>';
+      return td;
+    }
+    if (c.image) {
+      const img = document.createElement("img");
+      img.src = c.image;
+      img.alt = "";
+      img.loading = "lazy";       // dozens of PNGs: only fetch what is on screen
+      td.appendChild(img);
+    }
+    if (c.audio) {
+      const a = document.createElement("audio");
+      a.controls = true;
+      a.preload = "none";         // dozens of players: never load them all up front
+      a.src = c.audio;
+      td.appendChild(a);
+    }
+    return td;
+  };
+
+  // One row = one signal (ground truth or a method), one cell per alpha.
+  const row = (label, cells, controlPoint, rowspan, cls) => {
+    const tr = document.createElement("tr");
+    if (cls) tr.className = cls;
+    if (controlPoint !== null) {
+      const cp = document.createElement("th");
+      cp.className = "cp";
+      cp.rowSpan = rowspan || 1;
+      cp.innerHTML = controlPoint;
+      tr.appendChild(cp);
+    }
+    const mt = document.createElement("th");
+    mt.className = "mt";
+    mt.textContent = label;
+    tr.appendChild(mt);
+    M.alphas.forEach((_, i) => tr.appendChild(mediaCell((cells || [])[i])));
+    return tr;
+  };
+
+  M.cases.forEach((c) => {
+    const anchor = "case-" + c.id;
+
+    const link = document.createElement("a");
+    link.href = "#" + anchor;
+    link.textContent = c.label;
+    navEl.appendChild(link);
+
+    const sec = document.createElement("section");
+    sec.className = "case";
+    sec.id = anchor;
+
+    // Prefer the plural fields; fall back to the older single-angle ones.
+    // Angles may be zero-padded strings ("070"), so parse them as numbers.
+    const angles = (many, one) => {
+      const src = Array.isArray(many) && many.length ? many : [one];
+      return src.map((v) => parseInt(v, 10)).filter(Number.isFinite);
+    };
+    const ta = angles(c.target_angles, c.target_angle);
+    const ia = angles(c.inter_angles, c.inter_angle);
+
+    // Split every source by the target zone rather than by its annotation: the zone
+    // is what enh_rule='zone' actually keeps, and a case can have a annotated target
+    // sitting outside it.
+    const all = [...ta, ...ia];
+    const inside = all.filter((d) => d >= ZONE[0] && d <= ZONE[1]);
+    const outside = all.filter((d) => d < ZONE[0] || d > ZONE[1]);
+
+    const head = document.createElement("div");
+    head.className = "case-head";
+    if (all.length) head.innerHTML = geometryIcon(inside, outside);
+    const txt = document.createElement("div");
+    const h2 = document.createElement("h2");
+    h2.textContent = c.label;
+    if (c.t60) {
+      const rt = document.createElement("span");
+      rt.className = "unseen";      // same muted annotation styling
+      rt.innerHTML = `T<sub>60</sub> = ${c.t60} ms`;
+      h2.appendChild(rt);
+    }
+    if (!SEEN.some(([i, o]) => i === inside.length && o === outside.length)) {
+      const tag = document.createElement("span");
+      tag.className = "unseen";
+      tag.textContent = "(unseen)";
+      h2.appendChild(tag);
+    }
+    txt.appendChild(h2);
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    const count = (n, cls, where) => !n ? "" :
+      `<span class="${cls}">${n} source${n > 1 ? "s" : ""} in the ${where} region</span>`;
+    meta.innerHTML = [count(inside.length, "c-tgt", "target"),
+                      count(outside.length, "c-int", "non-target")]
+      .filter(Boolean).join("<br>");
+    txt.appendChild(meta);
+    head.appendChild(txt);
+    sec.appendChild(head);
+
+    const tw = document.createElement("div");
+    tw.className = "table-wrap";
+    const table = document.createElement("table");
+
+    // Header: Control point | Methods | EM (α=0) | MM (α=0.2) | … | PM (α=1)
+    const thead = document.createElement("thead");
+    const hrow = document.createElement("tr");
+    ["Control point", "Methods"].forEach((t) => {
+      const th = document.createElement("th");
+      th.textContent = t;
+      th.style.textAlign = "left";
+      hrow.appendChild(th);
+    });
+    M.alphas.forEach((_, i) => {
+      const th = document.createElement("th");
+      const mode = (M.alpha_modes || [])[i] || "";
+      const lab = (M.alpha_labels || M.alphas)[i];
+      th.innerHTML = `${mode}<span class="alpha">(${lab})</span>`;
+      hrow.appendChild(th);
+    });
+    thead.appendChild(hrow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+    tbody.appendChild(
+      row("Ground truth", c.groundtruth,
+          "Far-end<br>virtual control point", 1, "group-end"));
+    M.methods.forEach((m, i) => {
+      tbody.appendChild(
+        row(m.label, (c.files || {})[m.key],
+            i === 0 ? "Near-end<br>control point" : null,
+            i === 0 ? M.methods.length : 0,
+            i === 0 ? "group-start" : null));
+    });
+    table.appendChild(tbody);
+
+    tw.appendChild(table);
+    sec.appendChild(tw);
+    wrap.appendChild(sec);
+  });
+
+  // Only one clip plays at a time, so A/B comparisons never overlap. The video
+  // counts too -- it carries its own audio.
+  document.addEventListener("play", (e) => {
+    document.querySelectorAll("audio, video").forEach((a) => {
+      if (a !== e.target) a.pause();
+    });
+  }, true);
+
+  document.getElementById("updated").textContent =
+    new Date().toISOString().slice(0, 10);
+})();
+
+// Experiment video: reveal only once the file is known to load, and wire the
+// jump buttons to seek instead of splitting the recording into three files --
+// the point of the clip is hearing the modes switch back to back.
+(function video() {
+  const sec = document.getElementById("experiment");
+  const v = document.getElementById("expvid");
+  if (!sec || !v) return;
+  v.addEventListener("loadedmetadata", () => {
+    sec.hidden = false;
+    // Add the nav chip only once the video is known to load, so it never points
+    // at a hidden section.
+    const nav = document.getElementById("nav");
+    if (nav && !document.getElementById("nav-exp")) {
+      const a = document.createElement("a");
+      a.id = "nav-exp";
+      a.href = "#experiment";
+      a.textContent = "Experiment";
+      nav.appendChild(a);
+    }
+  });
+  v.addEventListener("error", () => { sec.hidden = true; });
+  sec.querySelectorAll(".jump button").forEach((b) => {
+    b.addEventListener("click", () => {
+      v.currentTime = Number(b.dataset.t) || 0;
+      v.play();
+    });
+  });
+})();
+</script>
+</body>
+</html>
