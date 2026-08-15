@@ -1,0 +1,130 @@
+{
+  "id": "case5",
+  "src_id": "inter_170_58",
+  "order": 5,
+  "mode": "brir",
+  "t60": "600",
+  "target_angles": [
+    70
+  ],
+  "inter_angles": [
+    170
+  ],
+  "source": "test_data_inter_170_58.npy",
+  "alphas": [
+    "0",
+    "0.2",
+    "0.5",
+    "0.8",
+    "1"
+  ],
+  "alpha_labels": [
+    "α = 0",
+    "α = 0.2",
+    "α = 0.5",
+    "α = 0.8",
+    "α = 1"
+  ],
+  "alpha_modes": [
+    "EM",
+    "MM",
+    "MM",
+    "MM",
+    "PM"
+  ],
+  "methods": [
+    "dsptat",
+    "compass",
+    "ltat"
+  ],
+  "groundtruth": [
+    {
+      "audio": "audio/case5/groundtruth_a000.mp3",
+      "image": "audio/case5/groundtruth_a000.png"
+    },
+    {
+      "audio": "audio/case5/groundtruth_a020.mp3",
+      "image": "audio/case5/groundtruth_a020.png"
+    },
+    {
+      "audio": "audio/case5/groundtruth_a050.mp3",
+      "image": "audio/case5/groundtruth_a050.png"
+    },
+    {
+      "audio": "audio/case5/groundtruth_a080.mp3",
+      "image": "audio/case5/groundtruth_a080.png"
+    },
+    {
+      "audio": "audio/case5/groundtruth_a100.mp3",
+      "image": "audio/case5/groundtruth_a100.png"
+    }
+  ],
+  "files": {
+    "dsptat": [
+      {
+        "audio": "audio/case5/dsptat_a000.mp3",
+        "image": "audio/case5/dsptat_a000.png"
+      },
+      {
+        "audio": "audio/case5/dsptat_a020.mp3",
+        "image": "audio/case5/dsptat_a020.png"
+      },
+      {
+        "audio": "audio/case5/dsptat_a050.mp3",
+        "image": "audio/case5/dsptat_a050.png"
+      },
+      {
+        "audio": "audio/case5/dsptat_a080.mp3",
+        "image": "audio/case5/dsptat_a080.png"
+      },
+      {
+        "audio": "audio/case5/dsptat_a100.mp3",
+        "image": "audio/case5/dsptat_a100.png"
+      }
+    ],
+    "compass": [
+      {
+        "audio": "audio/case5/compass_a000.mp3",
+        "image": "audio/case5/compass_a000.png"
+      },
+      {
+        "audio": "audio/case5/compass_a020.mp3",
+        "image": "audio/case5/compass_a020.png"
+      },
+      {
+        "audio": "audio/case5/compass_a050.mp3",
+        "image": "audio/case5/compass_a050.png"
+      },
+      {
+        "audio": "audio/case5/compass_a080.mp3",
+        "image": "audio/case5/compass_a080.png"
+      },
+      {
+        "audio": "audio/case5/compass_a100.mp3",
+        "image": "audio/case5/compass_a100.png"
+      }
+    ],
+    "ltat": [
+      {
+        "audio": "audio/case5/ltat_a000.mp3",
+        "image": "audio/case5/ltat_a000.png"
+      },
+      {
+        "audio": "audio/case5/ltat_a020.mp3",
+        "image": "audio/case5/ltat_a020.png"
+      },
+      {
+        "audio": "audio/case5/ltat_a050.mp3",
+        "image": "audio/case5/ltat_a050.png"
+      },
+      {
+        "audio": "audio/case5/ltat_a080.mp3",
+        "image": "audio/case5/ltat_a080.png"
+      },
+      {
+        "audio": "audio/case5/ltat_a100.mp3",
+        "image": "audio/case5/ltat_a100.png"
+      }
+    ]
+  }
+}
